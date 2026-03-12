@@ -8,7 +8,7 @@ spec:
   source:
     repoURL: https://github.com/brendoncardoso/brokerone-dispatcher-job
     targetRevision: main
-    path: brokerone-dispatcher-job
+    path: .
   destination:
     server: https://kubernetes.default.svc
     namespace: local
