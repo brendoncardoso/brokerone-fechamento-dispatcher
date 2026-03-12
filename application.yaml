@@ -1,12 +1,12 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: brokerone-dispatcher-job-local
+  name: brokerone-kafka-dispatcher-local
   namespace: argocd
 spec:
   project: default
   source:
-    repoURL: https://github.com/brendoncardoso/brokerone-dispatcher-job
+    repoURL: https://github.com/brendoncardoso/brokerone-kafka-dispatcher
     targetRevision: main
     path: .
   destination:

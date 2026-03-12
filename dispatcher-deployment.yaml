@@ -1,3 +1,40 @@
+# apiVersion: apps/v1
+# kind: Deployment
+# metadata:
+#   name: brokerone-kafka-dispatcher-local
+#   namespace: local
+#   labels:
+#     app: brokerone-kafka-dispatcher-local
+# spec:
+#   replicas: 1
+#   revisionHistoryLimit: 1
+#   selector:
+#     matchLabels:
+#       app: brokerone-kafka-dispatcher-local
+#   template:
+#     metadata:
+#       labels:
+#         app: brokerone-kafka-dispatcher-local
+#     spec:
+#       serviceAccountName: dispatcher-sa
+#       automountServiceAccountToken: true
+#       terminationGracePeriodSeconds: 10
+#       enableServiceLinks: false
+#       containers:
+#         - name: dispatcher
+#           image: broker-app-worker-base:local
+#           imagePullPolicy: IfNotPresent
+#           envFrom:
+#             - secretRef:
+#                 name: brokerone-kafka-dispatcher-keys-local
+#           resources:
+#             limits:
+#               cpu: "0.5"
+#               memory: 512Mi
+#             requests:
+#               cpu: "0.1"
+#               memory: 300Mi
+
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -24,6 +61,17 @@ spec:
         - name: dispatcher
           image: broker-app-worker-base:local
           imagePullPolicy: IfNotPresent
+          env:
+            - name: POD_NAME
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.name
+            - name: POD_NAMESPACE
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.namespace
+            - name: ARGOCD_APP_INSTANCE
+              value: brokerone-kafka-dispatcher-local
           envFrom:
             - secretRef:
                 name: brokerone-kafka-dispatcher-keys-local

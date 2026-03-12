@@ -1,4 +1,4 @@
-# Broker Dispatcher Job — Ambiente Local
+# BrokerOne Kafka Dispatcher — Ambiente Local
 
 Este guia descreve como executar o **dispatcher Kafka de fechamento** em ambiente local utilizando:
 
@@ -44,10 +44,10 @@ minikube version
 
 # 2. Estrutura do projeto Kubernetes
 
-Dentro da pasta `brokerone-dispatcher-job`:
+Dentro da pasta `brokerone-kafka-dispatcher`:
 
 ```
-brokerone-dispatcher-job/
+brokerone-kafka-dispatcher/
 │
 ├─ dispatcher-deployment.yaml
 ├─ dispatcher-rbac.yaml
@@ -138,7 +138,7 @@ O dispatcher utiliza variáveis de ambiente provenientes do `.env`.
 
 ```powershell
 kubectl create secret generic brokerone-kafka-dispatcher-keys-local \
---from-env-file=C:\Users\brendon.carvalho\Downloads\brokerone-dispatcher-job\.env \
+--from-env-file=C:\Users\brendon.carvalho\Downloads\brokerone-kafka-dispatcher\.env \
 -n local
 ```
 
@@ -240,14 +240,14 @@ Arquivo `application.yaml`:
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: brokerone-dispatcher-job-local
+  name: brokerone-kafka-dispatcher-local
   namespace: argocd
 spec:
   project: default
   source:
     repoURL: https://github.com/SEU-USUARIO/SEU-REPO.git
     targetRevision: main
-    path: brokerone-dispatcher-job
+    path: brokerone-kafka-dispatcher
   destination:
     server: https://kubernetes.default.svc
     namespace: local
