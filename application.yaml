@@ -8,7 +8,7 @@ spec:
   source:
     repoURL: https://github.com/brendoncardoso/brokerone-kafka-dispatcher.git
     targetRevision: main
-    path: brokerone-kafka-dispatcher
+    path: .
   destination:
     server: https://kubernetes.default.svc
     namespace: local
