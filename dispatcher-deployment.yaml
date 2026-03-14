@@ -43,7 +43,7 @@ spec:
               value: brokerone-kafka-dispatcher-keys-local
             - name: KAFKA_DISPATCHER_GROUP
               value: brokerone-dispatcher-group-local
-            - name: KAFKA_MAX_CONCURRENT_JOBS
+            - name: KAFKA_MAX_EXISTING_JOBS
               value: "5"
             - name: KAFKA_JOB_TTL_SECONDS
               value: "50"
